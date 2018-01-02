@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:inputType="number"
+            android:inputType="numberDecimal|number"
             android:textColorHint="@android:color/black"/>
 
         <TextView
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:inputType="number"
+            android:inputType="numberDecimal|number"
             android:textColorHint="@android:color/black"/>
 
         <TextView
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:inputType="number"
+            android:inputType="numberDecimal|number"
             android:textColorHint="@android:color/black"/>
 
         <TextView
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:inputType="number"
+            android:inputType="numberDecimal|number"
             android:textColorHint="@android:color/black"/>
 
         <TextView
@@ -174,7 +174,7 @@
             android:id="@+id/friday_edit_text"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberDecimal|number"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -214,7 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:inputType="number"
+            android:inputType="numberDecimal|number"
             android:textColorHint="@android:color/black"/>
 
         <TextView
@@ -251,7 +251,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:inputType="number"
+            android:inputType="numberDecimal|number"
             android:textColorHint="@android:color/black"/>
 
         <TextView
@@ -262,7 +262,8 @@
             android:layout_marginTop="8dp"
             android:text="@string/dollar_sign"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#4CAF50" />
+            android:textColor="#4CAF50"
+            />
 
     </RelativeLayout>
 

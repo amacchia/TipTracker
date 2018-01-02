@@ -228,9 +228,9 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
         }
 
         // Get tips received
-        int tipsReceived;
+        double tipsReceived;
         try {
-            tipsReceived = Integer.parseInt(editText.getText().toString());
+            tipsReceived = Double.parseDouble(editText.getText().toString());
         } catch (NumberFormatException nfe) {
             Log.e(TAG, "EditText did not have a correctly formatted number", nfe);
             Toast.makeText(this, "Must Enter a Number", Toast.LENGTH_SHORT).show();

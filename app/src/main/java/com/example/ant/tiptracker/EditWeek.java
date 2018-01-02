@@ -18,12 +18,15 @@ import android.widget.Toast;
 
 import com.example.ant.tiptracker.data.TipsContract.TipsEntry;
 
-import static java.lang.Integer.parseInt;
+import java.text.DecimalFormat;
+
+import static java.lang.Double.parseDouble;
+
 
 public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
     private Uri mCurrentWeekUri;
-    /** Identifier for the pet data loader */
+    /** Identifier for the tip data loader */
     private static final int EXISTING_TIPS_LOADER = 0;
 
     //Edit text fields
@@ -60,55 +63,55 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
     }
 
     private void saveWeek(){
-        int mondayTips;
-        int tuesdayTips;
-        int wednesdayTips;
-        int thursdayTips;
-        int fridayTips;
-        int saturdayTips;
-        int sundayTips;
+        double mondayTips;
+        double tuesdayTips;
+        double wednesdayTips;
+        double thursdayTips;
+        double fridayTips;
+        double saturdayTips;
+        double sundayTips;
 
         // Try to get values from edit text fields. If no new info is entered there is only a hint and text is blank
         try{
-            mondayTips = parseInt(mMondayEditText.getText().toString());
+            mondayTips = parseDouble(mMondayEditText.getText().toString());
         } catch (NumberFormatException error){
-            mondayTips = parseInt(mMondayEditText.getHint().toString());
+            mondayTips = parseDouble(mMondayEditText.getHint().toString());
         }
 
         try{
-            tuesdayTips = parseInt(mTuesdayEditText.getText().toString());
+            tuesdayTips = parseDouble(mTuesdayEditText.getText().toString());
         } catch (NumberFormatException error){
-            tuesdayTips = parseInt(mTuesdayEditText.getHint().toString());
+            tuesdayTips = parseDouble(mTuesdayEditText.getHint().toString());
         }
 
         try{
-            wednesdayTips = parseInt(mWednesdayEditText.getText().toString());
+            wednesdayTips = parseDouble(mWednesdayEditText.getText().toString());
         } catch (NumberFormatException error){
-            wednesdayTips = parseInt(mWednesdayEditText.getHint().toString());
+            wednesdayTips = parseDouble(mWednesdayEditText.getHint().toString());
         }
 
         try{
-            thursdayTips = parseInt(mThursdayEditText.getText().toString());
+            thursdayTips = parseDouble(mThursdayEditText.getText().toString());
         } catch (NumberFormatException error){
-            thursdayTips = parseInt(mThursdayEditText.getHint().toString());
+            thursdayTips = parseDouble(mThursdayEditText.getHint().toString());
         }
 
         try{
-            fridayTips = parseInt(mFridayEditText.getText().toString());
+            fridayTips = parseDouble(mFridayEditText.getText().toString());
         } catch (NumberFormatException error){
-            fridayTips = parseInt(mFridayEditText.getHint().toString());
+            fridayTips = parseDouble(mFridayEditText.getHint().toString());
         }
 
         try{
-            saturdayTips = parseInt(mSaturdayEditText.getText().toString());
+            saturdayTips = parseDouble(mSaturdayEditText.getText().toString());
         } catch (NumberFormatException error){
-            saturdayTips = parseInt(mSaturdayEditText.getHint().toString());
+            saturdayTips = parseDouble(mSaturdayEditText.getHint().toString());
         }
 
         try{
-            sundayTips = parseInt(mSundayEditText.getText().toString());
+            sundayTips = parseDouble(mSundayEditText.getText().toString());
         } catch (NumberFormatException error){
-            sundayTips = parseInt(mSundayEditText.getHint().toString());
+            sundayTips = parseDouble(mSundayEditText.getHint().toString());
         }
 
 
@@ -174,6 +177,8 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
         // Move to the first row (only row) of the cursor and get the index of the columns
         Log.v("EditWeek", DatabaseUtils.dumpCursorToString(cursor));
         if (cursor.moveToFirst()) {
+            DecimalFormat decimalFormatter = new DecimalFormat("0.00");
+            // Get column indexes from cursor
             int mondayColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_MONDAY);
             int tuesdayColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_TUESDAY);
             int wednesdayColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_WEDNESDAY);
@@ -182,22 +187,22 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
             int saturdayColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_SATURDAY);
             int sundayColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_SUNDAY);
 
+            // Get tips from cursor
+            double mondayTips = cursor.getDouble(mondayColumnIndex);
+            double tuesdayTips = cursor.getDouble(tuesdayColumnIndex);
+            double wednesdayTips = cursor.getDouble(wednesdayColumnIndex);
+            double thursdayTips = cursor.getDouble(thursdayColumnIndex);
+            double fridayTips = cursor.getDouble(fridayColumnIndex);
+            double saturdayTips = cursor.getDouble(saturdayColumnIndex);
+            double sundayTips = cursor.getDouble(sundayColumnIndex);
 
-            int mondayTips = cursor.getInt(mondayColumnIndex);
-            int tuesdayTips = cursor.getInt(tuesdayColumnIndex);
-            int wednesdayTips = cursor.getInt(wednesdayColumnIndex);
-            int thursdayTips = cursor.getInt(thursdayColumnIndex);
-            int fridayTips = cursor.getInt(fridayColumnIndex);
-            int saturdayTips = cursor.getInt(saturdayColumnIndex);
-            int sundayTips = cursor.getInt(sundayColumnIndex);
-
-            mMondayEditText.setHint(String.valueOf(mondayTips));
-            mTuesdayEditText.setHint(String.valueOf(tuesdayTips));
-            mWednesdayEditText.setHint(String.valueOf(wednesdayTips));
-            mThursdayEditText.setHint(String.valueOf(thursdayTips));
-            mFridayEditText.setHint(String.valueOf(fridayTips));
-            mSaturdayEditText.setHint(String.valueOf(saturdayTips));
-            mSundayEditText.setHint(String.valueOf(sundayTips));
+            mMondayEditText.setHint(decimalFormatter.format(mondayTips));
+            mTuesdayEditText.setHint(decimalFormatter.format(tuesdayTips));
+            mWednesdayEditText.setHint(decimalFormatter.format(wednesdayTips));
+            mThursdayEditText.setHint(decimalFormatter.format(thursdayTips));
+            mFridayEditText.setHint(decimalFormatter.format(fridayTips));
+            mSaturdayEditText.setHint(decimalFormatter.format(saturdayTips));
+            mSundayEditText.setHint(decimalFormatter.format(sundayTips));
         }
 
     }

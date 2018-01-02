@@ -28,13 +28,13 @@ public class TipDbHelper extends SQLiteOpenHelper {
         // Create tips table
         String SQL_CREATE_TIPS_TABLE = "CREATE TABLE " + TipsEntry.TABLE_NAME + " (" +
                 TipsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                TipsEntry.COLUMN_MONDAY + " INTEGER DEFAULT 0, " +
-                TipsEntry.COLUMN_TUESDAY+ " INTEGER DEFAULT 0, " +
-                TipsEntry.COLUMN_WEDNESDAY + " INTEGER DEFAULT 0, " +
-                TipsEntry.COLUMN_THURSDAY + " INTEGER DEFAULT 0, " +
-                TipsEntry.COLUMN_FRIDAY + " INTEGER DEFAULT 0, " +
-                TipsEntry.COLUMN_SATURDAY + " INTEGER DEFAULT 0, " +
-                TipsEntry.COLUMN_SUNDAY + " INTEGER DEFAULT 0, " +
+                TipsEntry.COLUMN_MONDAY + " REAL DEFAULT 0, " +
+                TipsEntry.COLUMN_TUESDAY+ " REAL DEFAULT 0, " +
+                TipsEntry.COLUMN_WEDNESDAY + " REAL DEFAULT 0, " +
+                TipsEntry.COLUMN_THURSDAY + " REAL DEFAULT 0, " +
+                TipsEntry.COLUMN_FRIDAY + " REAL DEFAULT 0, " +
+                TipsEntry.COLUMN_SATURDAY + " REAL DEFAULT 0, " +
+                TipsEntry.COLUMN_SUNDAY + " REAL DEFAULT 0, " +
                 TipsEntry.COLUMN_DATE + " TEXT);";
 
         //Log create statement
