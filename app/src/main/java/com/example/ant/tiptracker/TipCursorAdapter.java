@@ -1,0 +1,77 @@
+package com.example.ant.tiptracker;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CursorAdapter;
+import android.widget.TextView;
+
+import com.example.ant.tiptracker.data.TipsContract.TipsEntry;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * Created by Ant on 7/12/2017.
+ */
+
+public class TipCursorAdapter extends CursorAdapter {
+
+    private static final String LOG_TAG = TipCursorAdapter.class.getSimpleName();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy");
+    public TipCursorAdapter(Context context, Cursor cursor){
+        super(context, cursor, 0);
+    }
+
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        return LayoutInflater.from(context).inflate(R.layout.week_info_list_item, parent, false);
+    }
+
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        //TextViews to display info on in ListView
+        TextView tvWeek = (TextView) view.findViewById(R.id.week_textview);
+        TextView tvMoney = (TextView) view.findViewById(R.id.money_textview);
+
+        //Get the date from the cursor
+        String dateString = cursor.getString(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_DATE));
+        Date date;
+        try {
+            date = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            date = null;
+            Log.e(LOG_TAG, "Error converting String to Date", e);
+            e.printStackTrace();
+        }
+
+        //Get the amount made on each day if anything, then add to get total made for the week
+        int weeklyTotal;
+
+        int mondayTotal = cursor.getInt(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_MONDAY));
+        int tuesdayTotal = cursor.getInt(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_TUESDAY));
+        int wednesdayTotal = cursor.getInt(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_WEDNESDAY));
+        int thursdayTotal = cursor.getInt(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_THURSDAY));
+        int fridayTotal = cursor.getInt(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_FRIDAY));
+        int saturdayTotal = cursor.getInt(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_SATURDAY));
+        int sundayTotal = cursor.getInt(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_SUNDAY));
+
+
+        weeklyTotal = mondayTotal + tuesdayTotal + wednesdayTotal + thursdayTotal + fridayTotal + saturdayTotal + sundayTotal;
+
+        String weekID;
+        if (cursor.isFirst())
+            weekID = context.getString(R.string.current_week);
+        else
+            weekID = context.getResources().getString(R.string.week_id) + dateFormat.format(date);
+
+        String weekTotal = context.getResources().getString(R.string.dollar_sign) + String.valueOf(weeklyTotal);
+
+        tvWeek.setText(weekID);
+        tvMoney.setText(weekTotal);
+    }
+}
