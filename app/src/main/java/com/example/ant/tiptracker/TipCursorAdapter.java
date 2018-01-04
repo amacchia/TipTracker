@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.ant.tiptracker.data.TipsContract.TipsEntry;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,9 +24,14 @@ public class TipCursorAdapter extends CursorAdapter {
 
     private static final String LOG_TAG = TipCursorAdapter.class.getSimpleName();
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy");
+
+    // Formatter to display the tips with two decimal places
+    private DecimalFormat decimalFormatter = new DecimalFormat("0.00");
+
     public TipCursorAdapter(Context context, Cursor cursor){
         super(context, cursor, 0);
     }
+
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -69,7 +75,7 @@ public class TipCursorAdapter extends CursorAdapter {
         else
             weekID = context.getResources().getString(R.string.week_id) + dateFormat.format(date);
 
-        String weekTotal = context.getResources().getString(R.string.dollar_sign) + String.valueOf(weeklyTotal);
+        String weekTotal = context.getResources().getString(R.string.dollar_sign) + decimalFormatter.format(weeklyTotal);
 
         tvWeek.setText(weekID);
         tvMoney.setText(weekTotal);

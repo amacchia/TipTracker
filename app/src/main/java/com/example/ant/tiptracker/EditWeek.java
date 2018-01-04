@@ -162,8 +162,6 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
                 TipsEntry.COLUMN_SATURDAY,
                 TipsEntry.COLUMN_SUNDAY};
 
-
-
         return new CursorLoader(this,
                 mCurrentWeekUri,
                 projection,
@@ -177,7 +175,9 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
         // Move to the first row (only row) of the cursor and get the index of the columns
         Log.v("EditWeek", DatabaseUtils.dumpCursorToString(cursor));
         if (cursor.moveToFirst()) {
+            // Formatter to display the tips with two decimal places
             DecimalFormat decimalFormatter = new DecimalFormat("0.00");
+
             // Get column indexes from cursor
             int mondayColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_MONDAY);
             int tuesdayColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_TUESDAY);
