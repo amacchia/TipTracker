@@ -1,270 +1,275 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.ant.tiptracker.EditWeek">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp">
+        android:orientation="vertical"
+        tools:context="com.example.ant.tiptracker.EditWeek">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="8dp"
-            android:text="Monday"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
+            android:layout_marginBottom="8dp">
 
-        <EditText
-            android:id="@+id/monday_edit_text"
-            android:layout_width="100dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="8dp"
+                android:text="@string/monday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/monday_edit_text"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:inputType="numberDecimal|number"
+                android:textColorHint="@android:color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="101dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/dollar_sign"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#4CAF50"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:inputType="numberDecimal|number"
-            android:textColorHint="@android:color/black"/>
+            android:layout_marginBottom="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="8dp"
+                android:text="@string/tuesday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/tuesday_edit_text"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:inputType="numberDecimal|number"
+                android:textColorHint="@android:color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="101dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/dollar_sign"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#4CAF50"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="101dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/dollar_sign"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#4CAF50" />
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="8dp"
+                android:text="@string/wednesday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/wednesday_edit_text"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:inputType="numberDecimal|number"
+                android:textColorHint="@android:color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="101dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/dollar_sign"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#4CAF50"/>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="8dp"
-            android:text="@string/tuesday"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
+            android:layout_marginBottom="8dp">
 
-        <EditText
-            android:id="@+id/tuesday_edit_text"
-            android:layout_width="100dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="8dp"
+                android:text="@string/thursday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/thursday_edit_text"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:inputType="numberDecimal|number"
+                android:textColorHint="@android:color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="101dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/dollar_sign"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#4CAF50"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:inputType="numberDecimal|number"
-            android:textColorHint="@android:color/black"/>
+            android:layout_marginBottom="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="8dp"
+                android:text="@string/friday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/friday_edit_text"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:inputType="numberDecimal|number"
+                android:textColorHint="@android:color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="101dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/dollar_sign"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#4CAF50"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="101dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/dollar_sign"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#4CAF50" />
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="8dp"
+                android:text="@string/saturday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/saturday_edit_text"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:inputType="numberDecimal|number"
+                android:textColorHint="@android:color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="101dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/dollar_sign"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#4CAF50"/>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="8dp"
-            android:text="@string/wednesday"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="8dp"
+                android:text="@string/sunday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold"/>
 
-        <EditText
-            android:id="@+id/wednesday_edit_text"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:inputType="numberDecimal|number"
-            android:textColorHint="@android:color/black"/>
+            <EditText
+                android:id="@+id/sunday_edit_text"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:inputType="numberDecimal|number"
+                android:textColorHint="@android:color/black"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="101dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/dollar_sign"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#4CAF50" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="101dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/dollar_sign"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#4CAF50"
+                />
 
+        </RelativeLayout>
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="8dp"
-            android:text="@string/thursday"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/thursday_edit_text"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:inputType="numberDecimal|number"
-            android:textColorHint="@android:color/black"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="101dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/dollar_sign"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#4CAF50" />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="8dp"
-            android:text="@string/friday"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/friday_edit_text"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal|number"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textColorHint="@android:color/black"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="101dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/dollar_sign"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#4CAF50" />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="8dp"
-            android:text="@string/saturday"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/saturday_edit_text"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:inputType="numberDecimal|number"
-            android:textColorHint="@android:color/black"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="101dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/dollar_sign"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#4CAF50" />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="8dp"
-            android:text="@string/sunday"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/sunday_edit_text"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:inputType="numberDecimal|number"
-            android:textColorHint="@android:color/black"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="101dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/dollar_sign"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#4CAF50"
-            />
-
-    </RelativeLayout>
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
