@@ -12,13 +12,11 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -40,55 +38,16 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
     private static final int TIPS_LOADER = 0;
     private Dialog entryDialog;
     TipCursorAdapter mTipCursorAdapter;
-    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createEntryDialog();
-            }
-        });
-
         // Set Up List View
         ListView tipsListView = (ListView) findViewById(R.id.tips_list_view);
         View emptyView = findViewById(R.id.empty_view);
         tipsListView.setEmptyView(emptyView);
-
-        // Hide fab on scroll
-        tipsListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                // Hide fab on when scrolling, visible otherwise
-                if (scrollState == SCROLL_STATE_IDLE) {
-                    if (!fab.isShown()) {
-                        fab.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    fab.setVisibility(View.INVISIBLE);
-                    Log.i(TAG, "Set invisible in onScrollStateChanged");
-                }
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                // Had problem with onScroll being called on app opening,
-                // so I added the check to see if the first item is the top visible item
-                if (fab.isShown() && !(firstVisibleItem == 0)) {
-                    fab.setVisibility(View.INVISIBLE);
-                    Log.i(TAG, "Set invisible in onScroll");
-                } else {
-                    fab.setVisibility(View.VISIBLE);
-                }
-
-            }
-        });
 
         // Set Up Cursor Adapter with List View
         mTipCursorAdapter = new TipCursorAdapter(this, null);
@@ -130,8 +89,13 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            // Delete all work weeks from database
             case R.id.delete_all_data:
                 deleteAllEntries();
+                break;
+            // Add a work week to database
+            case R.id.add_work_week:
+                createEntryDialog();
                 break;
         }
         return super.onOptionsItemSelected(item);
