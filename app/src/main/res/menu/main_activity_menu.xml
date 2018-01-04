@@ -5,9 +5,8 @@
     <item
         android:id="@+id/add_work_week"
         android:title="Add Work Week"
-        app:showAsAction="ifRoom"
+        app:showAsAction="ifRoom|withText"
         android:icon="@drawable/ic_add_tip"
-
         />
 
     <item
