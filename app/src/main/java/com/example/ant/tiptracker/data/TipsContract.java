@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
- * Created by Ant on 7/1/2017.
+ * Created by Anthony Macchia on 7/1/2017.
  */
 
 public class TipsContract {

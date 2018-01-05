@@ -17,12 +17,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Ant on 7/12/2017.
+ * Created by Anthony Macchia on 7/12/2017.
  */
 
 public class TipCursorAdapter extends CursorAdapter {
 
     private static final String LOG_TAG = TipCursorAdapter.class.getSimpleName();
+
+    // Formatter for the dates
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy");
 
     // Formatter to display the tips with two decimal places
@@ -66,15 +68,18 @@ public class TipCursorAdapter extends CursorAdapter {
         double saturdayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_SATURDAY));
         double sundayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_SUNDAY));
 
-
-        weeklyTotal = mondayTotal + tuesdayTotal + wednesdayTotal + thursdayTotal + fridayTotal + saturdayTotal + sundayTotal;
+        // Sum the days of the week to get the total
+        weeklyTotal = mondayTotal + tuesdayTotal + wednesdayTotal + thursdayTotal + fridayTotal
+                + saturdayTotal + sundayTotal;
 
         String weekID;
         if (cursor.isFirst())
+            // Set the latest week to current week
             weekID = context.getString(R.string.current_week);
         else
             weekID = context.getResources().getString(R.string.week_id) + dateFormat.format(date);
 
+        // The weekly total
         String weekTotal = context.getResources().getString(R.string.dollar_sign) + decimalFormatter.format(weeklyTotal);
 
         tvWeek.setText(weekID);

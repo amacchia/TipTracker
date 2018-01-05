@@ -26,8 +26,7 @@ import static java.lang.Double.parseDouble;
 public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
     private Uri mCurrentWeekUri;
-    /** Identifier for the tip data loader */
-    private static final int EXISTING_TIPS_LOADER = 0;
+    private static final int EXISTING_TIPS_LOADER = 0; // Id of the tips loader
 
     //Edit text fields
     private EditText mMondayEditText;
@@ -43,6 +42,7 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_week);
 
+        // Title of the action bar
         setTitle(getString(R.string.edit_week_title));
 
         //Examine intent used to launch activity to get id of week
@@ -125,6 +125,7 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
         values.put(TipsEntry.COLUMN_SATURDAY, saturdayTips);
         values.put(TipsEntry.COLUMN_SUNDAY, sundayTips);
 
+        // Update the work week in the database
         int rowsAffected = getContentResolver().update(mCurrentWeekUri, values, null, null);
         if (rowsAffected == 0)
             Toast.makeText(this, R.string.error_saving, Toast.LENGTH_SHORT).show();
@@ -134,6 +135,7 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Create options menu
         getMenuInflater().inflate(R.menu.edit_week_activity_menu, menu);
         return true;
     }
@@ -196,6 +198,7 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
             double saturdayTips = cursor.getDouble(saturdayColumnIndex);
             double sundayTips = cursor.getDouble(sundayColumnIndex);
 
+            // Set the tips made on each day to the hint of the corresponding text view
             mMondayEditText.setHint(decimalFormatter.format(mondayTips));
             mTuesdayEditText.setHint(decimalFormatter.format(tuesdayTips));
             mWednesdayEditText.setHint(decimalFormatter.format(wednesdayTips));

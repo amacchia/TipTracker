@@ -35,9 +35,9 @@ import static com.example.ant.tiptracker.R.string.delete;
 public class WeekListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = WeekListActivity.class.getSimpleName();
 
-    private static final int TIPS_LOADER = 0;
-    private Dialog entryDialog;
-    TipCursorAdapter mTipCursorAdapter;
+    private static final int TIPS_LOADER = 0; // ID of tips loader
+    private Dialog entryDialog;               // The dialog for entering a new week
+    TipCursorAdapter mTipCursorAdapter;       // The cursor adapter to display data from cursor in the list view
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
             }
         });
 
+        // Give the user the option to delete a work week when the week is long pressed
         tipsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -82,12 +83,14 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Create the options menu
         getMenuInflater().inflate(R.menu.main_activity_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Determine which item in the menu was selected
         switch (item.getItemId()) {
             // Delete all work weeks from database
             case R.id.delete_all_data:
@@ -126,6 +129,7 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
     }
 
     private void createEntryDialog() {
+        // Create and show the dialog to create a new work week
         entryDialog = new Dialog(this);
         entryDialog.setContentView(R.layout.dialog_layout);
 
@@ -220,6 +224,7 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
     }
 
     private void createDeletionDialog(final Uri weekToDelete) {
+        // Dialog for deleting a work week
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_week);
         builder.setPositiveButton(getString(delete), new DialogInterface.OnClickListener() {
@@ -241,6 +246,7 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
     }
 
     private void deleteWeek(Uri weekToDelete) {
+        // Remove a work week from the database
         int rowsDeleted = getContentResolver().delete(weekToDelete, null, null);
 
         if (rowsDeleted == 0) {
@@ -255,6 +261,7 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // Create the cursor loader
         return new CursorLoader(this,
                 TipsEntry.CONTENT_URI,
                 null,
@@ -265,6 +272,7 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        // Set the cursor adapter to have the latest data loaded from the cursor
         mTipCursorAdapter.swapCursor(data);
     }
 

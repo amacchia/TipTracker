@@ -8,7 +8,7 @@ import android.util.Log;
 import com.example.ant.tiptracker.data.TipsContract.TipsEntry;
 
 /**
- * Created by Ant on 7/3/2017.
+ * Created by Anthony Macchia on 7/3/2017.
  */
 
 public class TipDbHelper extends SQLiteOpenHelper {
@@ -45,6 +45,6 @@ public class TipDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        // Only one version of tips database so far
     }
 }

@@ -22,7 +22,7 @@ public class TipProvider extends ContentProvider {
     private TipDbHelper mTipDbHelper;
 
     /**
-     * URI matcher code for the content URI for the pets table
+     * URI matcher code for the content URI for the tips table
      */
     private static final int TIPS = 100;
 
@@ -51,9 +51,11 @@ public class TipProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+        // The database to query
         SQLiteDatabase db = mTipDbHelper.getReadableDatabase();
 
-        Cursor cursor = null;
+        // The cursor to return
+        Cursor cursor;
 
         int match = sUriMatcher.match(uri);
         switch (match) {
@@ -68,6 +70,7 @@ public class TipProvider extends ContentProvider {
                         sortOrder);
                 break;
             case TIP_ID:
+                // Return cursor of specific work week
                 selection = TipsEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
 
@@ -92,6 +95,7 @@ public class TipProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+        // The database to insert a new row into
         SQLiteDatabase db = mTipDbHelper.getWritableDatabase();
 
         // Insert the ContentValues
@@ -105,18 +109,21 @@ public class TipProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+        // The database to delete from
         SQLiteDatabase db = mTipDbHelper.getWritableDatabase();
 
-        int rowsDeleted;
+        int rowsDeleted; // The number of rows deleted
 
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case TIPS:
+                // Delete the whole table
                 rowsDeleted = db.delete(TipsEntry.TABLE_NAME,
                         selection,
                         selectionArgs);
                 break;
             case TIP_ID:
+                // Delete a specific work week
                 selection = TipsEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 rowsDeleted = db.delete(TipsEntry.TABLE_NAME, selection, selectionArgs);
@@ -125,6 +132,7 @@ public class TipProvider extends ContentProvider {
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
 
+        // Notify listeners if one or more rows were deleted
         if (rowsDeleted != 0)
             getContext().getContentResolver().notifyChange(uri, null);
 
@@ -133,15 +141,19 @@ public class TipProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
+        // The database to update
         SQLiteDatabase db = mTipDbHelper.getWritableDatabase();
-        int rowsAffected;
+
+        int rowsAffected; // The number of rows affected by the update
 
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case TIPS:
+                // Update the whole tips table
                 rowsAffected = db.update(TipsEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case TIP_ID:
+                // Update a specific row of the table
                 selection = TipsEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 rowsAffected = db.update(TipsEntry.TABLE_NAME, values, selection, selectionArgs);
