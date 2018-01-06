@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.ant.tiptracker.data.TipsContract.TipsEntry;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -100,6 +101,11 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
             case R.id.add_work_week:
                 createEntryDialog();
                 break;
+            // Determine weekly average
+            case R.id.weekly_average:
+                double average = averageWeek();
+                createAverageDialog(average);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -126,6 +132,43 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
 
         AlertDialog deleteDialog = builder.create();
         deleteDialog.show();
+    }
+
+    private double averageWeek() {
+        Cursor cursor = mTipCursorAdapter.getCursor();  // Cursor of the tips database
+        int workWeeks = mTipCursorAdapter.getCount();   // The number of work weeks in the database
+
+        // Calculate the total amount of tips earned in the database
+        double total = 0;
+        if (cursor.moveToFirst()) {
+            for (int i = 0; i < workWeeks; i++) {
+                total += mTipCursorAdapter.weekTotal(cursor);
+                cursor.moveToNext();
+            }
+        } else { // The cursor is empty
+            return total;
+        }
+
+        return total / workWeeks; // Return the average
+    }
+
+    private void createAverageDialog(double average) {
+        // Formatter to display the tips with two decimal places
+        DecimalFormat decimalFormatter = new DecimalFormat("0.00");
+
+        // Create and show a Dialog of the average tips earned per week
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getString(R.string.average_tips_per_week) + decimalFormatter.format(average));
+
+        builder.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog averageDialog = builder.create();
+        averageDialog.show();
     }
 
     private void createEntryDialog() {

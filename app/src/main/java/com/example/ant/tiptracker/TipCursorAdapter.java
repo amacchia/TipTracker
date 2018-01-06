@@ -58,19 +58,7 @@ public class TipCursorAdapter extends CursorAdapter {
         }
 
         //Get the amount made on each day if anything, then add to get total made for the week
-        double weeklyTotal;
-
-        double mondayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_MONDAY));
-        double tuesdayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_TUESDAY));
-        double wednesdayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_WEDNESDAY));
-        double thursdayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_THURSDAY));
-        double fridayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_FRIDAY));
-        double saturdayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_SATURDAY));
-        double sundayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_SUNDAY));
-
-        // Sum the days of the week to get the total
-        weeklyTotal = mondayTotal + tuesdayTotal + wednesdayTotal + thursdayTotal + fridayTotal
-                + saturdayTotal + sundayTotal;
+        double weeklyTotal = weekTotal(cursor);
 
         String weekID;
         if (cursor.isFirst())
@@ -84,5 +72,30 @@ public class TipCursorAdapter extends CursorAdapter {
 
         tvWeek.setText(weekID);
         tvMoney.setText(weekTotal);
+    }
+
+    /**
+     * Find the total tips earned from a work week.
+     * @param cursor the cursor pointing to the row to that needs to summed
+     * @return the total amount of tips earned from a work week
+     */
+    public double weekTotal(Cursor cursor) {
+        //Get the amount made on each day if anything, then add to get total made for the week
+        double weeklyTotal;
+
+        double mondayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_MONDAY));
+        double tuesdayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_TUESDAY));
+        double wednesdayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_WEDNESDAY));
+        double thursdayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_THURSDAY));
+        double fridayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_FRIDAY));
+        double saturdayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_SATURDAY));
+        double sundayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_SUNDAY));
+
+
+        // Sum the days of the week to get the total
+        weeklyTotal = mondayTotal + tuesdayTotal + wednesdayTotal + thursdayTotal + fridayTotal
+                + saturdayTotal + sundayTotal;
+
+        return weeklyTotal;
     }
 }
