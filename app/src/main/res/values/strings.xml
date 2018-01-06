@@ -26,4 +26,7 @@
     <string name="edit_week_title">Edit Work Week</string>
     <string name="weeks_deleted">Weeks Deleted</string>
     <string name="save">Save</string>
+    <string name="determine_weekly_average">Determine Weekly Average</string>
+    <string name="average_tips_per_week">Average tips per week: $</string>
+    <string name="OK">OK</string>
 </resources>
