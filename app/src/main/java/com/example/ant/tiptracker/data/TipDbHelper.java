@@ -3,7 +3,6 @@ package com.example.ant.tiptracker.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.example.ant.tiptracker.data.TipsContract.TipsEntry;
 
@@ -12,8 +11,6 @@ import com.example.ant.tiptracker.data.TipsContract.TipsEntry;
  */
 
 public class TipDbHelper extends SQLiteOpenHelper {
-    public static final String LOG_TAG = TipDbHelper.class.getSimpleName();
-
     private static final String DATABASE_NAME = "tips.db";
     private static final int DATABASE_VERSION = 1;
 
@@ -21,7 +18,6 @@ public class TipDbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -36,9 +32,6 @@ public class TipDbHelper extends SQLiteOpenHelper {
                 TipsEntry.COLUMN_SATURDAY + " REAL DEFAULT 0, " +
                 TipsEntry.COLUMN_SUNDAY + " REAL DEFAULT 0, " +
                 TipsEntry.COLUMN_DATE + " TEXT);";
-
-        //Log create statement
-        Log.v(LOG_TAG, SQL_CREATE_TIPS_TABLE);
 
         db.execSQL(SQL_CREATE_TIPS_TABLE);
     }

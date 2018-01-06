@@ -6,11 +6,9 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -175,7 +173,6 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         // Move to the first row (only row) of the cursor and get the index of the columns
-        Log.v("EditWeek", DatabaseUtils.dumpCursorToString(cursor));
         if (cursor.moveToFirst()) {
             // Formatter to display the tips with two decimal places
             DecimalFormat decimalFormatter = new DecimalFormat("0.00");

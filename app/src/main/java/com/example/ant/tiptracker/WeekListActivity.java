@@ -13,7 +13,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,8 +33,6 @@ import java.util.Date;
 import static com.example.ant.tiptracker.R.string.delete;
 
 public class WeekListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String TAG = WeekListActivity.class.getSimpleName();
-
     private static final int TIPS_LOADER = 0; // ID of tips loader
     private Dialog entryDialog;               // The dialog for entering a new week
     TipCursorAdapter mTipCursorAdapter;       // The cursor adapter to display data from cursor in the list view
@@ -119,7 +116,6 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
             public void onClick(DialogInterface dialog, int which) {
                 // Delete db
                 int rowsDeleted = getContentResolver().delete(TipsEntry.CONTENT_URI, null, null);
-                Log.v(TAG, rowsDeleted + " " + getString(R.string.weeks_deleted));
             }
         });
         builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -243,7 +239,6 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
         try {
             tipsReceived = Double.parseDouble(editText.getText().toString());
         } catch (NumberFormatException nfe) {
-            Log.e(TAG, "EditText did not have a correctly formatted number", nfe);
             Toast.makeText(this, "Must Enter a Number", Toast.LENGTH_SHORT).show();
             return;
         }

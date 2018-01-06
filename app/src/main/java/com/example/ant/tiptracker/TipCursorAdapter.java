@@ -2,7 +2,6 @@ package com.example.ant.tiptracker;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +20,6 @@ import java.util.Date;
  */
 
 public class TipCursorAdapter extends CursorAdapter {
-
-    private static final String LOG_TAG = TipCursorAdapter.class.getSimpleName();
-
     // Formatter for the dates
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy");
 
@@ -53,7 +49,6 @@ public class TipCursorAdapter extends CursorAdapter {
             date = dateFormat.parse(dateString);
         } catch (ParseException e) {
             date = null;
-            Log.e(LOG_TAG, "Error converting String to Date", e);
             e.printStackTrace();
         }
 
