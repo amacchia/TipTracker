@@ -1,5 +1,5 @@
 # TipTracker
-Android App to track tips made.
+Android App to track tips made using a SQLite database.
 
 ## Screenshots
 ![](https://farm5.staticflickr.com/4733/38610618175_b46bcfaa15_n.jpg)
