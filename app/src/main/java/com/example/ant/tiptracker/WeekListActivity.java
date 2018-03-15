@@ -132,12 +132,13 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
 
     private double averageWeek() {
         Cursor cursor = mTipCursorAdapter.getCursor();  // Cursor of the tips database
-        int workWeeks = mTipCursorAdapter.getCount();   // The number of work weeks in the database
+        int completedWorkWeeks = mTipCursorAdapter.getCount() - 1;   // The number of work weeks in the database
 
         // Calculate the total amount of tips earned in the database
         double total = 0;
         if (cursor.moveToFirst()) {
-            for (int i = 0; i < workWeeks; i++) {
+            cursor.moveToNext(); // Skip current week, so it is not included in weekly average
+            for (int i = 0; i < completedWorkWeeks; i++) {
                 total += mTipCursorAdapter.weekTotal(cursor);
                 cursor.moveToNext();
             }
@@ -145,7 +146,7 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
             return total;
         }
 
-        return total / workWeeks; // Return the average
+        return total / completedWorkWeeks; // Return the average
     }
 
     private void createAverageDialog(double average) {

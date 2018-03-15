@@ -76,8 +76,6 @@ public class TipCursorAdapter extends CursorAdapter {
      */
     public double weekTotal(Cursor cursor) {
         //Get the amount made on each day if anything, then add to get total made for the week
-        double weeklyTotal;
-
         double mondayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_MONDAY));
         double tuesdayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_TUESDAY));
         double wednesdayTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(TipsEntry.COLUMN_WEDNESDAY));
@@ -88,9 +86,7 @@ public class TipCursorAdapter extends CursorAdapter {
 
 
         // Sum the days of the week to get the total
-        weeklyTotal = mondayTotal + tuesdayTotal + wednesdayTotal + thursdayTotal + fridayTotal
+        return mondayTotal + tuesdayTotal + wednesdayTotal + thursdayTotal + fridayTotal
                 + saturdayTotal + sundayTotal;
-
-        return weeklyTotal;
     }
 }
