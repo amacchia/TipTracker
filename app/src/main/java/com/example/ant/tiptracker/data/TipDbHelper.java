@@ -12,7 +12,7 @@ import com.example.ant.tiptracker.data.TipsContract.TipsEntry;
 
 public class TipDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "tips.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public TipDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -31,13 +31,16 @@ public class TipDbHelper extends SQLiteOpenHelper {
                 TipsEntry.COLUMN_FRIDAY + " REAL DEFAULT 0, " +
                 TipsEntry.COLUMN_SATURDAY + " REAL DEFAULT 0, " +
                 TipsEntry.COLUMN_SUNDAY + " REAL DEFAULT 0, " +
-                TipsEntry.COLUMN_DATE + " TEXT);";
+                TipsEntry.COLUMN_DATE + " TEXT);" +
+                TipsEntry.COLUMN_HOURS + " REAL DEFAULT 0, " +
+                TipsEntry.COLUMN_WAGES + " REAL DEFAULT 0";
 
         db.execSQL(SQL_CREATE_TIPS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Only one version of tips database so far
+        db.execSQL("ALTER TABLE " + TipsEntry.TABLE_NAME + " ADD COLUMN " + TipsEntry.COLUMN_HOURS);
+        db.execSQL("ALTER TABLE " + TipsEntry.TABLE_NAME + " ADD COLUMN " + TipsEntry.COLUMN_WAGES);
     }
 }

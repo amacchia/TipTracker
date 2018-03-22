@@ -34,6 +34,8 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
     private EditText mFridayEditText;
     private EditText mSaturdayEditText;
     private EditText mSundayEditText;
+    private EditText mHoursEditText;
+    private EditText mWagesEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,8 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
         mFridayEditText = (EditText) findViewById(R.id.friday_edit_text);
         mSaturdayEditText = (EditText) findViewById(R.id.saturday_edit_text);
         mSundayEditText = (EditText) findViewById(R.id.sunday_edit_text);
+        mHoursEditText = (EditText) findViewById(R.id.hours_edit_text);
+        mWagesEditText = (EditText) findViewById(R.id.weekly_pay_edit_text);
 
         // Launch loader
         getLoaderManager().initLoader(EXISTING_TIPS_LOADER, null, this);
@@ -68,6 +72,8 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
         double fridayTips;
         double saturdayTips;
         double sundayTips;
+        double hoursWorked;
+        double weeklyWages;
 
         // Try to get values from edit text fields. If no new info is entered there is only a hint and text is blank
         try{
@@ -112,6 +118,18 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
             sundayTips = parseDouble(mSundayEditText.getHint().toString());
         }
 
+        try{
+            hoursWorked = parseDouble(mHoursEditText.getText().toString());
+        } catch (NumberFormatException error){
+            hoursWorked = parseDouble(mHoursEditText.getHint().toString());
+        }
+
+        try{
+            weeklyWages = parseDouble(mWagesEditText.getText().toString());
+        } catch (NumberFormatException error){
+            weeklyWages = parseDouble(mWagesEditText.getHint().toString());
+        }
+
 
 
         ContentValues values = new ContentValues();
@@ -122,13 +140,15 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
         values.put(TipsEntry.COLUMN_FRIDAY, fridayTips);
         values.put(TipsEntry.COLUMN_SATURDAY, saturdayTips);
         values.put(TipsEntry.COLUMN_SUNDAY, sundayTips);
+        values.put(TipsEntry.COLUMN_HOURS, hoursWorked);
+        values.put(TipsEntry.COLUMN_WAGES, weeklyWages);
 
         // Update the work week in the database
         int rowsAffected = getContentResolver().update(mCurrentWeekUri, values, null, null);
         if (rowsAffected == 0)
             Toast.makeText(this, R.string.error_saving, Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(this, R.string.tips_saved, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.week_saved, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -160,7 +180,9 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
                 TipsEntry.COLUMN_THURSDAY,
                 TipsEntry.COLUMN_FRIDAY,
                 TipsEntry.COLUMN_SATURDAY,
-                TipsEntry.COLUMN_SUNDAY};
+                TipsEntry.COLUMN_SUNDAY,
+                TipsEntry.COLUMN_HOURS,
+                TipsEntry.COLUMN_WAGES};
 
         return new CursorLoader(this,
                 mCurrentWeekUri,
@@ -185,6 +207,8 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
             int fridayColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_FRIDAY);
             int saturdayColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_SATURDAY);
             int sundayColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_SUNDAY);
+            int hoursColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_HOURS);
+            int wagesColumnIndex = cursor.getColumnIndex(TipsEntry.COLUMN_WAGES);
 
             // Get tips from cursor
             double mondayTips = cursor.getDouble(mondayColumnIndex);
@@ -195,7 +219,11 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
             double saturdayTips = cursor.getDouble(saturdayColumnIndex);
             double sundayTips = cursor.getDouble(sundayColumnIndex);
 
-            // Set the tips made on each day to the hint of the corresponding text view
+            // Get hours and weekly wages from the cursor
+            double hoursWorked = cursor.getDouble(hoursColumnIndex);
+            double weeklyWages = cursor.getDouble(wagesColumnIndex);
+
+            // Set the tips made on each day to the hint of the corresponding view
             mMondayEditText.setHint(decimalFormatter.format(mondayTips));
             mTuesdayEditText.setHint(decimalFormatter.format(tuesdayTips));
             mWednesdayEditText.setHint(decimalFormatter.format(wednesdayTips));
@@ -203,6 +231,10 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
             mFridayEditText.setHint(decimalFormatter.format(fridayTips));
             mSaturdayEditText.setHint(decimalFormatter.format(saturdayTips));
             mSundayEditText.setHint(decimalFormatter.format(sundayTips));
+
+            // Set the hours and wages from the db to match the corresponding view
+            mHoursEditText.setHint(decimalFormatter.format(hoursWorked));
+            mWagesEditText.setHint(decimalFormatter.format(weeklyWages));
         }
 
     }
@@ -216,5 +248,7 @@ public class EditWeek extends AppCompatActivity implements LoaderManager.LoaderC
         mFridayEditText.setText("");
         mSaturdayEditText.setText("");
         mSundayEditText.setText("");
+        mHoursEditText.setText("");
+        mWagesEditText.setText("");
     }
 }

@@ -21,7 +21,8 @@
             android:authorities="com.example.ant.tiptracker"
             android:exported="false" />
 
-        <activity android:name=".EditWeek" android:parentActivityName=".WeekListActivity">
+        <activity android:name=".EditWeek" android:parentActivityName=".WeekListActivity"
+            android:windowSoftInputMode="stateUnchanged">
 
         </activity>
     </application>

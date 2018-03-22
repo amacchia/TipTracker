@@ -41,6 +41,8 @@ public class TipsContract {
         public static final String COLUMN_SATURDAY = "saturday";
         public static final String COLUMN_SUNDAY = "sunday";
         public static final String COLUMN_DATE = "date";
+        public static final String COLUMN_HOURS = "hours";
+        public static final String COLUMN_WAGES = "wages";
     }
 
 
