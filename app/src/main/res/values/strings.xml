@@ -13,7 +13,7 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
     <string name="error_saving">Error Saving Tips</string>
-    <string name="tips_saved">Tips Saved</string>
+    <string name="week_saved">Week Saved</string>
     <string name="empty_view_text">Click + To Add A Work Week</string>
     <string name="delete_week">Delete this week?</string>
     <string name="delete">Delete</string>
@@ -29,4 +29,9 @@
     <string name="determine_weekly_average">Determine Weekly Average</string>
     <string name="average_tips_per_week">Average tips per week: $</string>
     <string name="OK">OK</string>
+    <string name="hours_worked">Hours Worked</string>
+    <string name="week_created">Week Created</string>
+    <string name="hourly_rate">Hourly Rate: $</string>
+    <string name="add_work_week">Add Work Week</string>
+    <string name="calc_hourly_rate">Calculate Hourly Rate</string>
 </resources>

@@ -100,8 +100,10 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
                 break;
             // Determine weekly average
             case R.id.weekly_average:
-                double average = averageWeek();
-                createAverageDialog(average);
+                createAverageDialog(averageWeek());
+                break;
+            case R.id.average_hourly_pay:
+                createHourlyDialog(hourlyRate());
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -132,7 +134,7 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
 
     private double averageWeek() {
         Cursor cursor = mTipCursorAdapter.getCursor();  // Cursor of the tips database
-        int completedWorkWeeks = mTipCursorAdapter.getCount() - 1;   // The number of work weeks in the database
+        int completedWorkWeeks = mTipCursorAdapter.getCount() - 1;   // The number of work weeks in the database, excluding current work week
 
         // Calculate the total amount of tips earned in the database
         double total = 0;
@@ -148,6 +150,36 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
 
         return total / completedWorkWeeks; // Return the average
     }
+
+    private double hourlyRate() {
+        Cursor cursor = mTipCursorAdapter.getCursor();  // Cursor of the tips database
+        int completedWorkWeeks = mTipCursorAdapter.getCount() - 1;   // The number of work weeks in the database, excluding current work week
+
+        double totalHoursWorked = 0;
+        double total = 0; // Total including tips and weekly pay from weeks with hours worked
+
+        if (cursor.moveToFirst()) {
+            cursor.moveToNext(); // Skip current week
+
+            for (int i = 0; i < completedWorkWeeks; i++) {
+                // If a work week does not have hours worked
+                // do not include it in hours worked
+                double hours = cursor.getDouble(cursor.getColumnIndex(TipsEntry.COLUMN_HOURS));
+                if (hours > 0) {
+                    total += mTipCursorAdapter.weekTotal(cursor) +
+                            cursor.getDouble(cursor.getColumnIndex(TipsEntry.COLUMN_WAGES));
+                    totalHoursWorked += hours;
+                }
+                cursor.moveToNext();
+            }
+        }
+
+        if (totalHoursWorked > 0)
+            return total / totalHoursWorked;
+        else
+            return 0;
+    }
+
 
     private void createAverageDialog(double average) {
         // Formatter to display the tips with two decimal places
@@ -191,6 +223,25 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
         });
 
         entryDialog.show();
+    }
+
+    private void createHourlyDialog(double hourlyRate) {
+        // Formatter to display the tips with two decimal places
+        DecimalFormat decimalFormatter = new DecimalFormat("0.00");
+
+        // Create and show a Dialog of the average tips earned per week
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getString(R.string.hourly_rate) + decimalFormatter.format(hourlyRate));
+
+        builder.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog averageDialog = builder.create();
+        averageDialog.show();
     }
 
     private void insertWeek() {
@@ -257,7 +308,7 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
         if (newUri == null) {
             Toast.makeText(this, R.string.error_saving, Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, R.string.tips_saved, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.week_created, Toast.LENGTH_LONG).show();
         }
 
     }
