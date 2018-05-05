@@ -165,7 +165,8 @@ public class WeekListActivity extends AppCompatActivity implements LoaderManager
                 // If a work week does not have hours worked
                 // do not include it in hours worked
                 double hours = cursor.getDouble(cursor.getColumnIndex(TipsEntry.COLUMN_HOURS));
-                if (hours > 0) {
+                double weeklyPay = cursor.getDouble(cursor.getColumnIndex(TipsEntry.COLUMN_WAGES));
+                if (hours > 0 && weeklyPay > 0) {   // Only include completed work weeks
                     total += mTipCursorAdapter.weekTotal(cursor) +
                             cursor.getDouble(cursor.getColumnIndex(TipsEntry.COLUMN_WAGES));
                     totalHoursWorked += hours;

@@ -31,9 +31,9 @@ public class TipDbHelper extends SQLiteOpenHelper {
                 TipsEntry.COLUMN_FRIDAY + " REAL DEFAULT 0, " +
                 TipsEntry.COLUMN_SATURDAY + " REAL DEFAULT 0, " +
                 TipsEntry.COLUMN_SUNDAY + " REAL DEFAULT 0, " +
-                TipsEntry.COLUMN_DATE + " TEXT);" +
+                TipsEntry.COLUMN_DATE + " TEXT," +
                 TipsEntry.COLUMN_HOURS + " REAL DEFAULT 0, " +
-                TipsEntry.COLUMN_WAGES + " REAL DEFAULT 0";
+                TipsEntry.COLUMN_WAGES + " REAL DEFAULT 0)";
 
         db.execSQL(SQL_CREATE_TIPS_TABLE);
     }
